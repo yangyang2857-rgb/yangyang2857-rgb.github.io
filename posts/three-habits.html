@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>把重复的事交给工具：三个小习惯 · 王孙阳</title>
+<meta name="description" content="效率提升往往不来自什么大动作，而是来自三个具体判断：什么该省、什么绝不能省、以及怎么让工具替你记住规则。">
+<link rel="canonical" href="https://yangyang2857-rgb.github.io/posts/three-habits.html">
+<meta name="theme-color" content="#060a14">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把重复的事交给工具：三个小习惯">
+<meta property="og:description" content="效率提升不来自大动作，而来自三个具体判断。">
+<meta property="og:url" content="https://yangyang2857-rgb.github.io/posts/three-habits.html">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta property="article:published_time" content="2026-10-21">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230b1120'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' font-family='sans-serif' fill='%235eead4' text-anchor='middle'%3E%E7%8E%8B%3C/text%3E%3C/svg%3E">
+
+<style>
+:root{
+  --bg:#060a14;--surface:#0b1120;
+  --line:rgba(148,163,184,.14);--line-strong:rgba(148,163,184,.26);
+  --text:#e8eef9;--text-2:#9aa8c0;--text-3:#6b7a94;
+  --accent:#5eead4;--accent-soft:rgba(94,234,212,.10);--accent-line:rgba(94,234,212,.30);
+  --accent-2:#8b7cf6;--accent-grad:linear-gradient(120deg,#5eead4,#7ef0dc);
+  --accent-glow:rgba(94,234,212,.55);--on-accent:#04211c;
+  --nav-bg:rgba(6,10,20,.62);
+  --card-bg:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+  --subtle:rgba(255,255,255,.04);--hover:rgba(255,255,255,.075);
+  --code-bg:rgba(255,255,255,.045);
+  --glow-1:rgba(94,234,212,.13);--glow-2:rgba(139,124,246,.15);--glow-3:rgba(56,132,255,.07);
+  --shadow:0 24px 60px -28px rgba(0,0,0,.9);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+:root[data-theme="light"]{
+  --bg:#f6f7fb;--surface:#ffffff;
+  --line:rgba(15,23,42,.10);--line-strong:rgba(15,23,42,.18);
+  --text:#0f172a;--text-2:#4a5878;--text-3:#77839a;
+  --accent:#0e9887;--accent-soft:rgba(14,152,135,.09);--accent-line:rgba(14,152,135,.28);
+  --accent-2:#6b5cf0;--accent-grad:linear-gradient(120deg,#0e9887,#16b3a0);
+  --accent-glow:rgba(14,152,135,.40);--on-accent:#ffffff;
+  --nav-bg:rgba(246,247,251,.75);
+  --card-bg:linear-gradient(180deg,#ffffff,rgba(255,255,255,.72));
+  --subtle:rgba(15,23,42,.035);--hover:rgba(15,23,42,.065);
+  --code-bg:rgba(15,23,42,.045);
+  --glow-1:rgba(14,152,135,.10);--glow-2:rgba(107,92,240,.10);--glow-3:rgba(56,132,255,.06);
+  --shadow:0 24px 50px -30px rgba(15,23,42,.35);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","HarmonyOS Sans SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  background:var(--bg);color:var(--text);
+  font-size:16px;line-height:1.75;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;
+  transition:background .35s var(--ease),color .35s var(--ease);
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(620px 520px at 10% -10%,var(--glow-1),transparent 62%),
+    radial-gradient(560px 500px at 92% 106%,var(--glow-2),transparent 62%);
+  transition:background .35s var(--ease);
+}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--accent);color:var(--on-accent);padding:10px 18px;border-radius:0 0 12px 0;font-weight:700;text-decoration:none}
+.skip:focus{left:0}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--nav-bg);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-bottom:1px solid var(--line);
+  transition:background .35s var(--ease),border-color .35s var(--ease);
+}
+.nav-inner{max-width:820px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:12px}
+.logo{
+  font-weight:800;font-size:16px;letter-spacing:.02em;text-decoration:none;
+  display:inline-flex;align-items:center;gap:9px;color:var(--text);flex-shrink:0;
+}
+.logo::before{
+  content:"";width:9px;height:9px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 12px var(--accent-glow);
+}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-links a{
+  color:var(--text-2);text-decoration:none;font-size:14px;
+  padding:7px 12px;border-radius:10px;white-space:nowrap;
+  transition:color .25s var(--ease),background .25s var(--ease);
+}
+.nav-links a:hover{color:var(--text);background:var(--hover)}
+
+.theme-toggle{
+  width:38px;height:38px;flex-shrink:0;display:grid;place-items:center;
+  background:var(--subtle);border:1px solid var(--line);border-radius:11px;
+  color:var(--text-2);cursor:pointer;
+  transition:color .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
+}
+.theme-toggle:hover{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+.theme-toggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+:root[data-theme="dark"] .i-moon{display:none}
+:root[data-theme="light"] .i-sun{display:none}
+
+#progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:110;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 10px var(--accent-glow);}
+
+main{position:relative;z-index:1}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+article{padding:140px 0 72px}
+.art-head{margin-bottom:44px;padding-bottom:34px;border-bottom:1px solid var(--line)}
+.back{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13.5px;color:var(--text-3);text-decoration:none;
+  margin-bottom:28px;transition:color .25s var(--ease);
+}
+.back:hover{color:var(--accent)}
+.art-meta{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--text-3);margin-bottom:16px;
+}
+.art-meta .cat{
+  color:var(--accent);background:var(--accent-soft);
+  border:1px solid var(--accent-line);
+  padding:2px 10px;border-radius:999px;font-weight:600;font-size:12px;
+}
+.art-meta .sep{opacity:.4}
+h1{
+  font-size:clamp(28px,4.6vw,40px);line-height:1.3;
+  letter-spacing:-.02em;font-weight:800;
+}
+
+.prose{font-size:16.5px;line-height:1.95;color:var(--text-2)}
+.prose > * + *{margin-top:22px}
+.prose h2{
+  font-size:clamp(20px,2.6vw,24px);font-weight:700;color:var(--text);
+  letter-spacing:-.01em;line-height:1.45;
+  margin-top:52px;margin-bottom:0;padding-top:8px;
+}
+.prose h2::before{
+  content:"";display:block;width:32px;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  margin-bottom:16px;
+}
+.prose h3{
+  font-size:17.5px;font-weight:700;color:var(--text);
+  margin-top:34px;letter-spacing:-.005em;
+}
+.prose p{color:var(--text-2)}
+.prose strong{color:var(--text);font-weight:650}
+.prose em{color:var(--text);font-style:italic}
+.prose a{
+  color:var(--accent);text-decoration:none;
+  border-bottom:1px solid var(--accent-line);
+  transition:border-color .25s var(--ease),background .25s var(--ease);
+}
+.prose a:hover{border-bottom-color:var(--accent);background:var(--accent-soft)}
+
+.prose ul,.prose ol{padding-left:22px}
+.prose li{color:var(--text-2);margin-top:9px;padding-left:4px}
+.prose li::marker{color:var(--accent)}
+.prose ul li::marker{font-size:.85em}
+
+.prose blockquote{
+  border-left:3px solid var(--accent-line);
+  background:var(--accent-soft);
+  padding:18px 22px;
+  border-radius:0 12px 12px 0;
+  color:var(--text-2);
+}
+.prose blockquote p{margin:0}
+.prose blockquote p + p{margin-top:12px}
+
+.prose code{
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  font-size:.87em;
+  background:var(--code-bg);
+  border:1px solid var(--line);
+  padding:.15em .42em;border-radius:5px;
+  color:var(--text);
+  word-break:break-word;
+}
+.prose pre{
+  background:var(--code-bg);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px 22px;
+  overflow-x:auto;
+  font-size:13.5px;line-height:1.75;
+  -webkit-overflow-scrolling:touch;
+}
+.prose pre code{
+  background:none;border:none;padding:0;
+  font-size:inherit;color:var(--text-2);
+}
+
+.prose hr{
+  border:none;height:1px;
+  background:linear-gradient(90deg,var(--line-strong),transparent);
+  margin:46px 0;
+}
+
+.prose table{
+  width:100%;border-collapse:collapse;font-size:14.5px;
+  display:block;overflow-x:auto;white-space:nowrap;
+}
+.prose th,.prose td{
+  border:1px solid var(--line);
+  padding:10px 14px;text-align:left;
+}
+.prose th{background:var(--subtle);color:var(--text);font-weight:650}
+.prose td{color:var(--text-2)}
+
+.post-nav{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  margin-top:64px;padding-top:36px;border-top:1px solid var(--line);
+}
+.post-nav a{
+  display:block;text-decoration:none;color:inherit;
+  background:var(--card-bg);
+  border:1px solid var(--line);
+  border-radius:16px;padding:20px 22px;
+  transition:transform .28s var(--ease),border-color .28s var(--ease),box-shadow .28s var(--ease);
+}
+.post-nav a:hover{
+  transform:translateY(-3px);
+  border-color:var(--line-strong);
+  box-shadow:var(--shadow);
+}
+.post-nav .dir{
+  font-size:12px;color:var(--text-3);margin-bottom:6px;
+  display:flex;align-items:center;gap:5px;
+}
+.post-nav .t{font-size:14.5px;font-weight:650;color:var(--text);line-height:1.5}
+.post-nav a:hover .t{color:var(--accent)}
+.post-nav .next{text-align:right}
+.post-nav .next .dir{justify-content:flex-end}
+.post-nav .empty-slot{
+  display:flex;align-items:center;justify-content:center;
+  border:1px dashed var(--line);border-radius:16px;
+  padding:20px;font-size:13px;color:var(--text-3);
+}
+
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--line);
+  padding:32px 0;font-size:13.5px;color:var(--text-3);
+  margin-top:32px;
+}
+.foot-inner{max-width:820px;margin:0 auto;padding:0 24px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer b{color:var(--text-2);font-weight:600}
+footer a{color:var(--text-2);text-decoration:none}
+footer a:hover{color:var(--accent)}
+
+/* ---------- 目录侧栏 ---------- */
+.art-wrap{max-width:1140px}
+.art-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 214px;
+  gap:60px;
+  align-items:start;
+}
+.art-main{min-width:0}
+
+.toc{
+  position:sticky;
+  top:104px;
+  max-height:calc(100vh - 150px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-bottom:20px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--line-strong) transparent;
+}
+.toc::-webkit-scrollbar{width:4px}
+.toc::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:2px}
+
+.toc-title{
+  font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-3);
+  margin-bottom:14px;padding-left:14px;
+}
+.toc-list{display:flex;flex-direction:column;gap:1px}
+.toc-list a{
+  position:relative;
+  display:block;
+  font-size:13px;line-height:1.5;
+  color:var(--text-3);text-decoration:none;
+  padding:6px 0 6px 14px;
+  transition:color .22s var(--ease);
+}
+.toc-list a::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:1px;
+  background:var(--line);
+}
+.toc-list a::after{
+  content:"";position:absolute;left:0;top:6px;bottom:6px;width:2px;
+  border-radius:2px;background:var(--accent);
+  opacity:0;transform:scaleY(.25);
+  transition:opacity .24s var(--ease),transform .24s var(--ease);
+}
+.toc-list a:hover{color:var(--text-2)}
+.toc-list a.active{color:var(--accent);font-weight:600}
+.toc-list a.active::after{opacity:1;transform:scaleY(1)}
+.toc-list a.lv3{padding-left:28px;font-size:12.5px}
+.toc-list a.lv3::before{left:14px}
+.toc-list a.lv3::after{left:14px}
+.toc-list a.lv3.active{color:var(--accent)}
+
+/* 移动端：悬浮按钮 + 底部抽屉 */
+.toc-fab{
+  display:none;
+  position:fixed;right:18px;bottom:22px;z-index:120;
+  width:50px;height:50px;border-radius:50%;
+  align-items:center;justify-content:center;
+  background:var(--accent-grad);
+  color:var(--on-accent);
+  border:none;cursor:pointer;
+  box-shadow:0 14px 32px -10px var(--accent-glow);
+  transition:transform .25s var(--ease);
+}
+.toc-fab:active{transform:scale(.94)}
+.toc-fab svg{
+  width:21px;height:21px;fill:none;stroke:currentColor;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+
+.toc-backdrop{
+  position:fixed;inset:0;z-index:125;
+  background:rgba(0,0,0,.5);
+  opacity:0;visibility:hidden;
+  transition:opacity .28s var(--ease),visibility .28s;
+  -webkit-backdrop-filter:blur(2px);
+  backdrop-filter:blur(2px);
+}
+.toc-backdrop.open{opacity:1;visibility:visible}
+
+.toc-drawer{
+  position:fixed;left:0;right:0;bottom:0;z-index:130;
+  background:var(--surface);
+  border-top:1px solid var(--line-strong);
+  border-radius:22px 22px 0 0;
+  padding:20px 22px 32px;
+  max-height:70vh;overflow-y:auto;
+  transform:translateY(100%);
+  visibility:hidden;
+  transition:transform .32s var(--ease),visibility .32s;
+  box-shadow:0 -24px 60px -24px rgba(0,0,0,.65);
+}
+.toc-drawer.open{transform:translateY(0);visibility:visible}
+.toc-drawer .toc-title{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-left:14px;margin-bottom:12px;
+}
+.toc-drawer .toc-title button{
+  background:none;border:none;color:var(--text-3);
+  font-size:13px;cursor:pointer;padding:4px 6px;font-family:inherit;
+}
+.toc-drawer .toc-list{padding-bottom:8px}
+.toc-drawer .toc-list a{font-size:14.5px;padding:9px 0 9px 14px}
+
+@media (max-width:1080px){
+  .art-layout{grid-template-columns:1fr;gap:0}
+  .toc{display:none}
+  .toc-fab{display:flex}
+}
+
+@media (max-width:620px){
+  .wrap{padding:0 18px}
+  .nav-inner{padding:11px 16px;gap:8px}
+  .logo{font-size:15px}
+  .nav-links a{padding:6px 9px;font-size:13px}
+  .theme-toggle{width:34px;height:34px;border-radius:10px}
+  article{padding:118px 0 56px}
+  .prose{font-size:16px;line-height:1.9}
+  .prose pre{padding:16px 16px;font-size:12.5px;border-radius:12px}
+  .post-nav{grid-template-columns:1fr}
+  .post-nav .next{text-align:left}
+  .post-nav .next .dir{justify-content:flex-start}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+
+<script>
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    document.documentElement.setAttribute('data-theme', saved || (prefersLight ? 'light' : 'dark'));
+  })();
+</script>
+</head>
+
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div id="progress" aria-hidden="true"></div>
+
+<nav aria-label="主导航">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">王孙阳</a>
+    <div class="nav-links">
+      <a href="../blog.html">笔记</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换深浅色" aria-pressed="false">
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+  <article>
+    <div class="wrap art-wrap">
+      <div class="art-layout">
+      <div class="art-main">
+      <header class="art-head">
+        <a class="back" href="../blog.html">← 全部笔记</a>
+        <div class="art-meta">
+          <span class="cat">效率</span>
+          <span class="sep" aria-hidden="true">·</span>
+          <time datetime="2026-10-21">2026 年 10 月 21 日</time>
+          <span class="sep" aria-hidden="true">·</span>
+          <span>约 5 分钟</span>
+        </div>
+        <h1>把重复的事交给工具：三个小习惯</h1>
+      </header>
+
+      <div class="prose">
+        <p>我以前对「提高效率」这件事有点误解，总觉得要学点什么厉害的技能，或者装一套复杂的方法论。折腾一阵之后发现，真正省下时间的，往往是一些很小、很具体的判断。</p>
+        <p>下面三个习惯，是我这两年最常用的。</p>
+
+        <h2>一、动手前先算一笔账：这事我还会做几遍</h2>
+        <p>任何一件事开始之前，我会先问自己一个问题：<strong>这是我最后一次做它吗？</strong></p>
+        <p>如果答案是「大概还要做十几次」，那手动做就是亏的。如果答案是「这辈子就这一次」，那花两个小时写脚本就是亏的。</p>
+        <p>举个真实的例子。整理资料时，我有一批文件名乱七八糟的东西，类似这样：</p>
+        <pre><code>IMG_20260314_1.jpg
+IMG_20260314_1 (2).jpg
+screenshot (7).png</code></pre>
+        <p>手动一个个改，大概要四十分钟，而且很烦。写个脚本重命名，第一次要二十五分钟。看起来手动更快。</p>
+        <p>但问题是，这种整理我每个月都会做一次。三次之后，脚本就回本了；之后每次都是净赚。</p>
+        <p>所以判断标准不是「现在哪个快」，而是 <em>单次成本 × 预计次数</em> 和 <em>自动化成本 + 维护成本</em> 的比较。这个账不用算得很精确，能看出量级差就够了。</p>
+
+        <h2>二、把规则写下来，别记在脑子里</h2>
+        <p>第二个习惯更简单，但收益最明显：<strong>任何需要判断的事，都先把它变成一条能复述的规则。</strong></p>
+        <p>我发现很多人（包括我自己）在做重复工作时，其实每次都在重新做同样的判断。比如给文件分类，每次都停下来想「这个算不算资料？放哪个文件夹？」——想了三十次，每次都想得不完全一样，最后文件夹里一片混乱。</p>
+        <p>解决办法是：先花十分钟，把规则写下来。</p>
+        <ul>
+          <li>带日期的发票，一律进「财务 / 年份」；</li>
+          <li>命名格式统一为「年月日_主题」，从源头解决排序问题；</li>
+          <li>拿不准的，先丢进「待整理」，每周固定清一次。</li>
+        </ul>
+        <p>写下来之后有三个好处：</p>
+        <ol>
+          <li>判断变成查表，速度快很多，也不再纠结；</li>
+          <li>结果一致，以后能靠搜索找到，而不是靠回忆；</li>
+          <li>规则可以被交给工具，让脚本或 AI 按规则执行。</li>
+        </ol>
+        <blockquote>
+          <p>如果一件事你没法用一句话说清判断标准，那说明你还没想清楚——这时候交给工具，只会更快地产生混乱。</p>
+        </blockquote>
+
+        <h2>三、永远给自己留一条回去的路</h2>
+        <p>这一条是被坑出来的。</p>
+        <p>有次我写了个批量处理的脚本，测试的时候拿两个文件试了一下，结果很理想，于是直接对着一整个文件夹跑了。跑完发现规则里有个边界情况没考虑到，一部分文件被改成了错误的格式。</p>
+        <p>更糟的是，我没有备份。</p>
+        <p>那天我花了一整个晚上，靠文件大小和修改时间一点点把它们找回来。从此我给自己定了三条死规矩：</p>
+        <ul>
+          <li><strong>先小批量试跑。</strong>两个文件能跑通，不代表两百个能跑通；</li>
+          <li><strong>改之前留副本。</strong>哪怕是临时复制一份到别的目录，也比没有强；</li>
+          <li><strong>破坏性的操作先打印预览。</strong>让脚本先输出「我将要做哪些改动」，看完再决定是否执行。</li>
+        </ul>
+        <p>看起来只是多了几步，但真出事的时候，这几步就是你和灾难之间的距离。自动化放大的不只是效率，还有错误——一次跑错，就是两百次跑错。</p>
+
+        <h2>自动化解决不了的那部分</h2>
+        <p>说了这么多好处，也必须说清楚它的边界。工具能替你执行，但不能替你判断三件事：</p>
+        <table>
+          <thead>
+            <tr><th>工具做不到</th><th>为什么</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>判断目标对不对</td><td>你把一件本来不该做的事自动化了，只是更快地做错事</td></tr>
+            <tr><td>处理例外情况</td><td>规则总有覆盖不到的地方，边界需要人来定</td></tr>
+            <tr><td>对结果负责</td><td>出问题时，没人会去找脚本的责任</td></tr>
+          </tbody>
+        </table>
+        <p>所以我现在的位置是：<strong>把执行交给工具，把判断留给自己。</strong></p>
+        <p>工具替我记住格式、处理批量、节约重复动作；我负责想清楚要什么、边界在哪、出了问题怎么退回去。分清楚这两件事之后，效率提升反而是副产品。</p>
+
+        <hr>
+
+        <p>如果只记一句话：<strong>先想清楚规则，再交给工具；先留好退路，再按下执行。</strong></p>
+        <p>剩下的事情，交给时间。</p>
+      </div>
+
+      <nav class="post-nav" aria-label="文章导航">
+        <a href="handwritten-html.html">
+          <div class="dir"><span aria-hidden="true">←</span> 上一篇</div>
+          <div class="t">为什么我用纯手写 HTML 做个人主页</div>
+        </a>
+        <div class="empty-slot">已经是最早一篇</div>
+      </nav>
+      </div>
+
+      <aside class="toc" aria-label="本页目录">
+        <div class="toc-title">本页目录</div>
+        <nav class="toc-list" id="tocList"></nav>
+      </aside>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+<button class="toc-fab" id="tocFab" type="button" aria-label="打开目录" aria-expanded="false" aria-controls="tocDrawer">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+</button>
+
+<div class="toc-backdrop" id="tocBackdrop"></div>
+
+<div class="toc-drawer" id="tocDrawer" role="dialog" aria-modal="false" aria-label="文章目录">
+  <div class="toc-title">
+    <span>本页目录</span>
+    <button type="button" id="tocClose">关闭</button>
+  </div>
+  <nav class="toc-list" id="tocListMobile"></nav>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div>© <span id="year">2026</span> <b>王孙阳</b></div>
+    <div><a href="../blog.html">全部笔记</a></div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    function syncLabel(t) {
+      btn.setAttribute('aria-pressed', t === 'light' ? 'true' : 'false');
+      btn.setAttribute('aria-label', t === 'light' ? '切换到深色模式' : '切换到浅色模式');
+    }
+    syncLabel(root.getAttribute('data-theme'));
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      syncLabel(next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+
+  var bar = document.getElementById('progress');
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+      ticking = false;
+    });
+  }, {passive: true});
+
+  /* ---------- 目录侧栏 ---------- */
+  (function () {
+    var prose = document.querySelector('.prose');
+    var list = document.getElementById('tocList');
+    var mobile = document.getElementById('tocListMobile');
+    if (!prose || !list) return;
+
+    var heads = Array.prototype.slice.call(prose.querySelectorAll('h2, h3'));
+    if (!heads.length) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var fab = document.getElementById('tocFab');
+    var drawer = document.getElementById('tocDrawer');
+    var backdrop = document.getElementById('tocBackdrop');
+    var closeBtn = document.getElementById('tocClose');
+
+    function openDrawer() {
+      if (!drawer) return;
+      drawer.classList.add('open');
+      if (backdrop) backdrop.classList.add('open');
+      if (fab) fab.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      if (!drawer) return;
+      drawer.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('open');
+      if (fab) fab.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    heads.forEach(function (h, i) {
+      if (!h.id) h.id = 'sec-' + (i + 1);
+      var label = (h.textContent || '').trim();
+
+      [list, mobile].forEach(function (box) {
+        if (!box) return;
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = label;
+        if (h.tagName === 'H3') a.className = 'lv3';
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          closeDrawer();
+          var top = h.getBoundingClientRect().top + window.pageYOffset - 92;
+          window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+          if (history.replaceState) history.replaceState(null, '', '#' + h.id);
+        });
+        box.appendChild(a);
+      });
+    });
+
+    var links = Array.prototype.slice.call(list.querySelectorAll('a'));
+    var linksM = mobile ? Array.prototype.slice.call(mobile.querySelectorAll('a')) : [];
+
+    function setActive(id) {
+      links.forEach(function (a, i) {
+        a.classList.toggle('active', heads[i] && heads[i].id === id);
+      });
+      linksM.forEach(function (a, i) {
+        a.classList.toggle('active', heads[i] && heads[i].id === id);
+      });
+    }
+
+    var raf = false;
+    function update() {
+      var current = heads[0].id;
+      for (var i = 0; i < heads.length; i++) {
+        if (heads[i].getBoundingClientRect().top <= 130) current = heads[i].id;
+      }
+      setActive(current);
+      raf = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (raf) return;
+      raf = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+
+    update();
+
+    if (fab) fab.addEventListener('click', openDrawer);
+    if (backdrop) backdrop.addEventListener('click', closeDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeDrawer();
+    });
+  })();
+</script>
+</body>
+</html>
