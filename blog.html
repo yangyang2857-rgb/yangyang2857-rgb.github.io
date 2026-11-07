@@ -99,7 +99,7 @@ body::before{
 
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
 
-nav{
+.site-nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   background:var(--nav-bg);
   backdrop-filter:blur(18px) saturate(140%);
@@ -316,6 +316,13 @@ footer a:hover{color:var(--accent)}
   .subscribe-inner{padding:28px 22px;border-radius:18px}
   .subscribe .btns{width:100%}
   .subscribe .btn{flex:1;justify-content:center}
+
+  /* --- mobile a11y: touch targets & safe spacing --- */
+  .nav-links a{min-height:40px;display:inline-flex;align-items:center;padding:0 10px}
+  .theme-toggle{width:38px;height:38px;border-radius:11px}
+  footer a,.foot-inner a{display:inline-flex;align-items:center;min-height:40px}
+  .back{min-height:40px}
+  .hero{padding:104px 0 64px}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -341,7 +348,7 @@ footer a:hover{color:var(--accent)}
 <body>
 <a class="skip" href="#main">跳到主要内容</a>
 
-<nav aria-label="主导航">
+<nav class="site-nav" aria-label="主导航">
   <div class="nav-inner">
     <a class="logo" href="index.html">王孙阳</a>
     <div class="nav-links">
