@@ -558,6 +558,8 @@ screenshot (7).png</code></pre>
     function syncLabel(t) {
       btn.setAttribute('aria-pressed', t === 'light' ? 'true' : 'false');
       btn.setAttribute('aria-label', t === 'light' ? '切换到深色模式' : '切换到浅色模式');
+      var tc = document.querySelector('meta[name="theme-color"]');
+      if (tc) tc.setAttribute('content', t === 'light' ? '#f6f7fb' : '#060a14');
     }
     syncLabel(root.getAttribute('data-theme'));
     btn.addEventListener('click', function () {
