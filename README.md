@@ -1,162 +1,200 @@
-# 王孙阳 · 个人主页
+# Wang Sunyang · Personal Website
 
-纯手写 HTML / CSS / JavaScript 搭起来的个人站点，没有框架、没有构建、没有第三方依赖。改完文件 `git push`，GitHub Pages 自动发布。
+**English** · [简体中文](README.zh-CN.md)
 
-**线上地址：<https://yangyang2857-rgb.github.io/>**
+A personal site built by hand in plain HTML / CSS / JavaScript — no framework, no build
+step, no third-party dependencies. Edit a file, `git push`, GitHub Pages publishes it.
+
+**Live: <https://yangyang2857-rgb.github.io/>**
 
 ![GitHub Pages](https://img.shields.io/badge/hosting-GitHub%20Pages-2ea44f)
 ![No build](https://img.shields.io/badge/build-none-blue)
 ![No deps](https://img.shields.io/badge/dependencies-0-lightgrey)
 ![Theme](https://img.shields.io/badge/theme-dark%20%2F%20light-5eead4)
 
-## 目录
+## Contents
 
-- [仓库里有什么](#仓库里有什么)
-- [页面一览](#页面一览)
-- [技术实现](#技术实现)
-- [本地预览](#本地预览)
-- [写一篇新笔记](#写一篇新笔记)
-- [部署方式](#部署方式)
-- [命名与路径约定](#命名与路径约定)
-- [浏览器兼容与降级](#浏览器兼容与降级)
-- [已知取舍](#已知取舍)
-- [联系](#联系)
-- [版权](#版权)
+- [What is in the repository](#what-is-in-the-repository)
+- [Pages](#pages)
+- [How it is built](#how-it-is-built)
+- [Local preview](#local-preview)
+- [Writing a new note](#writing-a-new-note)
+- [Deployment](#deployment)
+- [Naming and path conventions](#naming-and-path-conventions)
+- [Browser support and fallbacks](#browser-support-and-fallbacks)
+- [Deliberate trade-offs](#deliberate-trade-offs)
+- [Contact](#contact)
+- [Copyright](#copyright)
 
-## 仓库里有什么
+## What is in the repository
 
-| 路径 | 作用 | 说明 |
+| Path | Purpose | Notes |
 | --- | --- | --- |
-| `index.html` | 首页 | 单页长滚动，八个区块：首屏、关于、现在、技能、作品、实验室、成长轨迹、联系 |
-| `blog.html` | 笔记列表 | 卡片列表 + 分类筛选（全部 / 前端 / 效率），空分类有兜底提示 |
-| `404.html` | 404 页 | GitHub Pages 会自动把它用于未命中的路径 |
-| `posts/handwritten-html.html` | 第 1 篇 | 《为什么我用纯手写 HTML 做个人主页》，2026-11-08 |
-| `posts/three-habits.html` | 第 2 篇 | 《把重复的事交给工具：三个小习惯》，2026-10-21 |
-| `笔记更新指南.md` | 维护文档 | 加新文章、改分类、改上一篇/下一篇的完整步骤 |
+| `index.html` | Home page | Single long-scroll page, eight sections: hero, about, now, skills, work, lab, timeline, contact |
+| `blog.html` | Notes list | Card list plus category filter (all / frontend / productivity), with an empty-state hint |
+| `404.html` | 404 page | GitHub Pages serves this automatically for unmatched paths |
+| `posts/handwritten-html.html` | Note 1 | "Why I build my personal site in hand-written HTML", 2026-11-08 |
+| `posts/three-habits.html` | Note 2 | "Hand the repetitive work to tools: three small habits", 2026-10-21 |
+| `笔记更新指南.md` | Maintenance doc | Full steps for adding a post, changing categories, wiring prev/next |
 
-整个仓库只有 7 个文件、约 140 KB，没有 `package.json`、没有 `node_modules`、没有构建产物，克隆下来直接就是发布内容。
+Seven files in total, about 140 KB. No `package.json`, no `node_modules`, no build output —
+clone it and the repository *is* the published site.
 
-## 页面一览
+## Pages
 
-**首页 `index.html`**
+**Home `index.html`**
 
-- 首屏：姓名、定位（在读学生 · 前端 / 设计 / AI 工具）、两个入口按钮（作品 / 笔记）
-- 关于：自我介绍与两个数字（个人项目、常用工具）
-- 现在：在学 / 在做 / 在看三栏，比简历更即时
-- 技能：网页开发、设计与排版、内容创作、AI 工具应用，只写「具体能做什么」，不打分数
-- 作品：个人主页、学习笔记、效率工具小实验三张卡片
-- 实验室：批量重命名与归档、资料汇总成索引、写作先要结构——三个日常在跑的小流程
-- 成长轨迹：时间轴，从「好奇网站怎么做出来」到「探索与积累」
-- 联系：邮箱、微信、GitHub
+- Hero: name, positioning (student · frontend / design / AI tooling), two entry buttons (work / notes)
+- About: a short self-introduction and two figures (personal projects, daily tools)
+- Now: learning / building / reading in three columns — more current than a résumé
+- Skills: web development, design and typography, content, AI tooling — described as things I can
+  actually do, no scores
+- Work: three cards — personal site, study notes, small productivity experiments
+- Lab: batch rename and archiving, turning scattered material into an index, structure before
+  writing — three small workflows that run daily
+- Timeline: from "how does a website even work" to "exploring and accumulating"
+- Contact: email, WeChat, GitHub
 
-**笔记页 `posts/*.html`**
+**Notes `posts/*.html`**
 
-每篇文章是独立 HTML，结构一致：`<title>` + `meta description` + `article:published_time`、`.art-meta`（分类 · 日期 · 阅读时长）、`<h1>`、`.toc` 本页目录（窄屏收成抽屉）、`.prose` 正文、`.post-nav` 上一篇 / 下一篇。
+Each post is a standalone HTML file with the same skeleton: `<title>` + `meta description` +
+`article:published_time`, `.art-meta` (category · date · reading time), `<h1>`, `.toc` (collapses
+into a drawer on narrow screens), `.prose` body, and `.post-nav` for previous / next.
 
-## 技术实现
+## How it is built
 
-### 没有构建步骤
+### No build step
 
-选择手写而不是 Jekyll / Hexo / Vite，原因很直接：这个站点只有几页，引入构建链后每次改一行字都要装环境、跑命令、等产物。现在的做法是「文件即站点」，编辑器里改完推送就上线，任何人查看源代码看到的就是实际运行的代码。
+I chose hand-written HTML over Jekyll / Hexo / Vite for a simple reason: the site is a handful of
+pages, and a build chain means installing an environment, running a command and waiting for output
+every time a single word changes. The current model is "the file is the site": save, push, live.
+What anyone sees in view-source is exactly what is running.
 
-代价是样式在四个页面里各有一份内联副本（首页、列表、404、文章模板），改配色要改四处——这是刻意接受的重复，换来零依赖和零等待。
+The cost is that styles are duplicated inline across four pages (home, list, 404, article
+template), so a colour change happens in four places. That repetition is deliberate — it buys zero
+dependencies and zero waiting.
 
-### 双主题
+### Dual theme
 
-- 主题由 `<html data-theme="dark|light">` 控制，两套 CSS 变量：深色底 `#060a14`、浅色底 `#f6f7fb`，强调色分别是 `#5eead4` 与 `#0e9887`
-- 用户点右上角按钮切换，选择写进 `localStorage`；没手动选过时跟随系统 `prefers-color-scheme` 并监听其变化
-- 关键细节：`<head>` 里内联了一段同步脚本，**在首帧绘制前**就把 `data-theme` 定好，避免深色用户看到一闪而过的白屏
-- 切换时同步更新 `meta[name="theme-color"]`，手机浏览器地址栏颜色跟着变
+- Theme is driven by `<html data-theme="dark|light">` with two sets of CSS variables: dark
+  background `#060a14`, light background `#f6f7fb`, accents `#5eead4` and `#0e9887`
+- The button in the top-right corner writes the choice to `localStorage`; until the visitor picks
+  one, it follows the system `prefers-color-scheme` and listens for changes
+- The important detail: a small synchronous script in `<head>` sets `data-theme` **before the first
+  paint**, so a dark-mode visitor never sees a white flash
+- Switching also updates `meta[name="theme-color"]`, so the mobile browser address bar follows
 
-### 排版与响应式
+### Typography and responsive layout
 
-- 字体走系统栈：`-apple-system` / `Segoe UI` / `PingFang SC` / `HarmonyOS Sans SC` / `Hiragino Sans GB` / `Microsoft YaHei`，不加载任何 Web 字体，中文首屏没有 FOUT
-- 标题与间距用 `clamp()` 做流体缩放（如 `clamp(56px, 9vw, 82px)`），不靠一堆断点硬撑
-- 网格在三档断点（920 / 820 / 620px）收窄：三列 → 两列 → 单列，首屏双栏在小屏改为上下堆叠
+- System font stack: `-apple-system` / `Segoe UI` / `PingFang SC` / `HarmonyOS Sans SC` /
+  `Hiragino Sans GB` / `Microsoft YaHei`. No web fonts are loaded, so there is no FOUT
+- Headings and spacing scale fluidly with `clamp()` (e.g. `clamp(56px, 9vw, 82px)`) instead of a
+  pile of breakpoints
+- The grid narrows at three breakpoints (920 / 820 / 620px): three columns → two → one; the
+  two-column hero stacks vertically on small screens
 
-### 交互
+### Interaction
 
-- 顶部滚动进度条，`requestAnimationFrame` 节流，一帧最多算一次
-- 区块用 `IntersectionObserver` 做进入视口时的淡入上移，不监听 `scroll` 算位置
-- 笔记列表的分类筛选纯前端实现，按 `data-cat` 匹配，切换时同步 `aria-pressed` 并显示/隐藏空状态提示
+- A reading-progress bar at the top, throttled with `requestAnimationFrame` to at most one
+  calculation per frame
+- Sections fade and rise into view via `IntersectionObserver` rather than a `scroll` listener
+- Category filtering on the notes list is pure frontend: match on `data-cat`, update
+  `aria-pressed` on toggle, show or hide the empty state
 
-### 可访问性
+### Accessibility
 
-- 每个页面第一个可聚焦元素是「跳到主要内容」链接，直达 `#main`
-- 导航、文章目录、上一篇/下一篇都带 `aria-label`；装饰性箭头、分隔符标 `aria-hidden="true"`
-- 主题按钮用 `aria-pressed` 表达当前状态，并按目标状态改写 `aria-label`（「切换到浅色模式」/「切换到深色模式」）
-- `prefers-reduced-motion: reduce` 下关闭淡入、平滑滚动等动效
-- 语义化结构：一个 `<h1>`、区块用 `<section>` + `<h2>`，正文用 `<p>` / `<ul>` / `<pre><code>`
+- The first focusable element on every page is a "skip to main content" link pointing at `#main`
+- Navigation, article TOC and prev/next links all carry `aria-label`; decorative arrows and
+  separators are marked `aria-hidden="true"`
+- The theme button expresses state with `aria-pressed` and rewrites its `aria-label` to describe
+  the target state ("switch to light mode" / "switch to dark mode")
+- Under `prefers-reduced-motion: reduce`, fades and smooth scrolling are turned off
+- Semantic structure: one `<h1>`, sections as `<section>` + `<h2>`, body copy as `<p>` / `<ul>` /
+  `<pre><code>`
 
-### 分享与收录
+### Sharing and indexing
 
-- 每页有 `canonical`、`description`、`og:*`、`twitter:card`
-- favicon 是内联 `data:` 的 SVG（深色圆角方块 + 「王」字），不额外发请求
-- `meta name="color-scheme"` 声明支持深浅色，让表单控件和滚动条跟随主题
+- Every page has `canonical`, `description`, `og:*` and `twitter:card`
+- The favicon is an inline `data:` SVG (dark rounded square with the character 王) — no extra request
+- `meta name="color-scheme"` declares light and dark support so form controls and scrollbars follow
+  the theme
 
-## 本地预览
+## Local preview
 
-因为页面之间是相对路径，直接双击打开也能看，但更推荐起一个本地服务，避免 `file://` 下的路径与 `localStorage` 行为差异：
+Pages use relative paths, so double-clicking a file mostly works — but a local server is better,
+because `file://` changes path resolution and `localStorage` behaviour:
 
 ```bash
 git clone https://github.com/yangyang2857-rgb/yangyang2857-rgb.github.io.git
 cd yangyang2857-rgb.github.io
 python3 -m http.server 8000
-# 浏览器打开 http://localhost:8000/
+# open http://localhost:8000/
 ```
 
-## 写一篇新笔记
+## Writing a new note
 
-完整步骤见 [`笔记更新指南.md`](笔记更新指南.md)，这里是要点：
+The full checklist lives in [`笔记更新指南.md`](笔记更新指南.md). The essentials:
 
-1. 复制 `posts/three-habits.html` 作为模板，重命名为英文小写短横线（如 `css-layout-notes.html`）
-2. 改六处：`<title>`、`meta description`、`article:published_time`、`.art-meta`、`<h1>`、`.prose` 正文
-3. 改底部 `.post-nav`：左边指向前一篇，右边指向后一篇，没有就留 `<div class="empty-slot">`
-4. 在 `blog.html` 的 `<ul class="post-list">` **最上面**插入新卡片（最新的在最上），同步筛选按钮上的 `count` 数字；开新分类才需要加筛选按钮
-5. 推送，等 Pages 构建完成
+1. Copy `posts/three-habits.html` as the template and rename it to lowercase English with hyphens
+   (e.g. `css-layout-notes.html`)
+2. Change six places: `<title>`, `meta description`, `article:published_time`, `.art-meta`, `<h1>`,
+   and the `.prose` body
+3. Update `.post-nav` at the bottom: left points to the previous post, right to the next; leave
+   `<div class="empty-slot">` where there is none
+4. Insert the new card at the **top** of `<ul class="post-list">` in `blog.html` (newest first) and
+   update the `count` in the filter buttons; add a filter button only when opening a new category
+5. Push and wait for the Pages build
 
-## 部署方式
+## Deployment
 
-- 托管：GitHub Pages，源为 `main` 分支根目录
-- 域名：`yangyang2857-rgb.github.io`，没有 `CNAME` 文件，也没有自定义域
-- 没有 GitHub Actions 工作流：不需要构建，Pages 只负责把文件原样发出去
-- 发布延迟：推送后通常几十秒内生效，缓存未过期时强刷一次（Ctrl/Cmd + Shift + R）
+- Hosting: GitHub Pages, source = `main` branch, repository root
+- Domain: `yangyang2857-rgb.github.io` — no `CNAME` file, no custom domain
+- No GitHub Actions workflow: nothing needs building, Pages just serves the files as they are
+- Publish delay: usually a few tens of seconds after pushing; force-reload (Ctrl/Cmd + Shift + R) if
+  a cache is still warm
 
-## 命名与路径约定
+## Naming and path conventions
 
-| 约定 | 说明 |
+| Convention | Notes |
 | --- | --- |
-| 文章文件名 | 英文小写 + 短横线。中文名可用，但网址会变成一长串 `%E4%B8%AD%E6%96%87`，不好分享 |
-| 相对路径 | `posts/` 内互相链接**不加** `../`；指回主页或列表页才写 `../index.html`、`../blog.html` |
-| 分类一致性 | 卡片的 `data-cat` 与筛选按钮的 `data-filter` 必须完全相同（含空格），差一个字符筛出来就是空的 |
-| 日期 | 文章页的 `article:published_time` 与列表页的 `<time datetime>` 两处都要改 |
-| 代码块转义 | 正文里出现 `<` `>` 要写成 `&lt;` `&gt;`，否则标签会被浏览器吃掉 |
+| Post filename | Lowercase English with hyphens. Chinese names work, but the URL becomes a long `%E4%B8%AD%E6%96%87` string that is awkward to share |
+| Relative paths | Links between files inside `posts/` **omit** `../`; links back to the homepage or list use `../index.html`, `../blog.html` |
+| Category consistency | A card's `data-cat` and a filter button's `data-filter` must match exactly, spaces included — one character off and the filter shows nothing |
+| Dates | Both the post's `article:published_time` and the list's `<time datetime>` must be updated |
+| Escaping in code blocks | `<` and `>` in body text must be written `&lt;` and `&gt;`, or the browser eats them as tags |
 
-## 浏览器兼容与降级
+## Browser support and fallbacks
 
-面向近两年的主流浏览器（Chrome / Edge / Safari / Firefox，含移动端）。用到的都是稳定特性：CSS 变量、Grid、`clamp()`、`IntersectionObserver`。
+Targets the major browsers of the last two years (Chrome / Edge / Safari / Firefox, mobile
+included). Everything used is a stable feature: CSS variables, Grid, `clamp()`,
+`IntersectionObserver`.
 
-做过的降级处理：
+Fallbacks in place:
 
-- `localStorage` 读写全部包在 `try/catch` 里——隐私模式下读写会抛异常，主题退回跟随系统，不影响浏览
-- `matchMedia(...).addEventListener` 不可用时退回 `addListener`
-- `prefers-reduced-motion` 生效时，动效全部关掉，只保留静态样式
+- All `localStorage` reads and writes are wrapped in `try/catch` — private mode throws, and the
+  theme degrades to following the system without breaking the page
+- Where `matchMedia(...).addEventListener` is unavailable, it falls back to `addListener`
+- With `prefers-reduced-motion` active, all motion is disabled and only static styling remains
 
-## 已知取舍
+## Deliberate trade-offs
 
-- **样式四份重复**：首页、列表、404、文章各有一份内联 CSS。改配色或间距要同步四处，好处是零构建、零请求
-- **文章靠手动维护**：加文章 = 复制模板 + 改内容 + 列表页加卡片。文章到二十篇以上再考虑写个本地脚本批量生成
-- **没有 sitemap / RSS**：目前靠搜索引擎自然收录，没有主动提交
-- **没有暗色图片适配**：站内没用到照片，如果以后加，需要按主题准备两套或加滤镜
+- **Styles duplicated four times**: home, list, 404 and article each carry their own inline CSS.
+  A colour or spacing change touches four files — the payoff is zero build and zero requests
+- **Posts are maintained by hand**: adding one means copying the template, editing content and
+  adding a card. A local generator becomes worth writing past roughly twenty posts
+- **No sitemap / RSS**: indexing relies on search engines crawling naturally, nothing is submitted
+- **No dark-mode image handling**: the site uses no photos today. If that changes, each image needs
+  two variants or a filter
 
-## 联系
+## Contact
 
-| 渠道 | 地址 |
+| Channel | Address |
 | --- | --- |
-| 邮箱 | [3383927177@qq.com](mailto:3383927177@qq.com) |
-| 微信 | `ILOVEHUTAOMUCH` |
+| Email | [3383927177@qq.com](mailto:3383927177@qq.com) |
+| WeChat | `ILOVEHUTAOMUCH` |
 | GitHub | [@yangyang2857-rgb](https://github.com/yangyang2857-rgb) |
 
-## 版权
+## Copyright
 
-仓库没有附 `LICENSE` 文件，代码与文字著作权归作者所有。想转载文章或复用页面设计，先邮件或微信说一声。
+No `LICENSE` file is attached; copyright in the code and the text belongs to the author. To
+republish an article or reuse the page design, get in touch by email or WeChat first.
