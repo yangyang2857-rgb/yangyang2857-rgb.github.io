@@ -11,8 +11,17 @@
 ![No deps](https://img.shields.io/badge/dependencies-0-lightgrey)
 ![Theme](https://img.shields.io/badge/theme-dark%20%2F%20light-5eead4)
 
+## 文档索引
+
+| 入口 | 内容 |
+| --- | --- |
+| [笔记更新指南](docs/notes-guide.md) | 加新文章、改分类、接上一篇/下一篇的完整步骤 |
+| [拾光 OneStar 文档](https://github.com/yangyang2857-rgb/onestar/blob/main/docs/README.md) | 姊妹仓库：安卓构建与发版规范 |
+| [跨平台开发与发布总纲](https://github.com/yangyang2857-rgb/onestar/blob/main/docs/cross-platform-release-plan.md) | 六生态时间表与 12 道发布闸门 |
+
 ## 目录
 
+- [文档索引](#文档索引)
 - [仓库里有什么](#仓库里有什么)
 - [页面一览](#页面一览)
 - [技术实现](#技术实现)
@@ -34,7 +43,7 @@
 | `404.html` | 404 页 | GitHub Pages 会自动把它用于未命中的路径 |
 | `posts/handwritten-html.html` | 第 1 篇 | 《为什么我用纯手写 HTML 做个人主页》，2026-11-08 |
 | `posts/three-habits.html` | 第 2 篇 | 《把重复的事交给工具：三个小习惯》，2026-10-21 |
-| `笔记更新指南.md` | 维护文档 | 加新文章、改分类、改上一篇/下一篇的完整步骤 |
+| `docs/notes-guide.md` | 维护文档 | 加新文章、改分类、改上一篇/下一篇的完整步骤 |
 
 整个仓库只有 7 个文件、约 140 KB，没有 `package.json`、没有 `node_modules`、没有构建产物，克隆下来直接就是发布内容。
 
@@ -109,7 +118,7 @@ python3 -m http.server 8000
 
 ## 写一篇新笔记
 
-完整步骤见 [`笔记更新指南.md`](笔记更新指南.md)，这里是要点：
+完整步骤见 [`docs/notes-guide.md`](docs/notes-guide.md)，这里是要点：
 
 1. 复制 `posts/three-habits.html` 作为模板，重命名为英文小写短横线（如 `css-layout-notes.html`）
 2. 改六处：`<title>`、`meta description`、`article:published_time`、`.art-meta`、`<h1>`、`.prose` 正文

@@ -12,8 +12,17 @@ step, no third-party dependencies. Edit a file, `git push`, GitHub Pages publish
 ![No deps](https://img.shields.io/badge/dependencies-0-lightgrey)
 ![Theme](https://img.shields.io/badge/theme-dark%20%2F%20light-5eead4)
 
+## Documentation
+
+| Entry | Covers |
+| --- | --- |
+| [Note workflow guide](docs/notes-guide.md) | Adding a post, categories, prev/next wiring — the full checklist |
+| [OneStar docs](https://github.com/yangyang2857-rgb/onestar/blob/main/docs/README.md) | Sister repo: Android build and release specs |
+| [OneStar cross-platform plan](https://github.com/yangyang2857-rgb/onestar/blob/main/docs/cross-platform-release-plan.md) | Six-ecosystem timeline and the 12 release gates |
+
 ## Contents
 
+- [Documentation](#documentation)
 - [What is in the repository](#what-is-in-the-repository)
 - [Pages](#pages)
 - [How it is built](#how-it-is-built)
@@ -35,7 +44,7 @@ step, no third-party dependencies. Edit a file, `git push`, GitHub Pages publish
 | `404.html` | 404 page | GitHub Pages serves this automatically for unmatched paths |
 | `posts/handwritten-html.html` | Note 1 | "Why I build my personal site in hand-written HTML", 2026-11-08 |
 | `posts/three-habits.html` | Note 2 | "Hand the repetitive work to tools: three small habits", 2026-10-21 |
-| `笔记更新指南.md` | Maintenance doc | Full steps for adding a post, changing categories, wiring prev/next |
+| `docs/notes-guide.md` | Maintenance doc | Full steps for adding a post, changing categories, wiring prev/next |
 
 Seven files in total, about 140 KB. No `package.json`, no `node_modules`, no build output —
 clone it and the repository *is* the published site.
@@ -133,7 +142,7 @@ python3 -m http.server 8000
 
 ## Writing a new note
 
-The full checklist lives in [`笔记更新指南.md`](笔记更新指南.md). The essentials:
+The full checklist lives in [`docs/notes-guide.md`](docs/notes-guide.md). The essentials:
 
 1. Copy `posts/three-habits.html` as the template and rename it to lowercase English with hyphens
    (e.g. `css-layout-notes.html`)
